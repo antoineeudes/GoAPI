@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  db:
+    build: ./init_db/
+    ports:
+      - 5432:5432
+  api:
+      build: .
+      ports:
+          - 5000:5000
+      command: "go run main.go"
+      depends_on:
+        - db

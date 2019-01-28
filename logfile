@@ -1,0 +1,10 @@
+2019-01-28 15:31:31.946 CET [68147] LOG:  listening on IPv6 address "::1", port 5432
+2019-01-28 15:31:31.946 CET [68147] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-01-28 15:31:31.950 CET [68147] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-01-28 15:31:31.978 CET [68148] LOG:  database system was shut down at 2019-01-28 15:31:21 CET
+2019-01-28 15:31:31.985 CET [68147] LOG:  database system is ready to accept connections
+2019-01-28 18:06:32.087 CET [68147] LOG:  received fast shutdown request
+2019-01-28 18:06:32.090 CET [68147] LOG:  aborting any active transactions
+2019-01-28 18:06:32.095 CET [68147] LOG:  background worker "logical replication launcher" (PID 68154) exited with exit code 1
+2019-01-28 18:06:32.096 CET [68149] LOG:  shutting down
+2019-01-28 18:06:32.123 CET [68147] LOG:  database system is shut down
