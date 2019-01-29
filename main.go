@@ -3,7 +3,6 @@ package main
 import (
 	"API/config"
 	"API/controllers"
-	"API/models"
 	"log"
 	"net/http"
 
@@ -24,8 +23,5 @@ func main() {
 	config.DatabaseInit()
 	router := InitializeRouter()
 	defer config.Db().Close()
-
-	models.NewCar(&models.Car{Manufacturer: "citroen", Design: "ds3", Style: "sport", Doors: 4})
-
 	log.Fatal(http.ListenAndServe(":5000", router))
 }

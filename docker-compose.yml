@@ -4,11 +4,17 @@ services:
   db:
     build: ./init_db/
     ports:
-      - 5432:5432
+      - ${DB_PORT}:5432
+    env_file:
+      - ./.env
   api:
       build: .
       ports:
-          - 5000:5000
+        - ${API_PORT}:5000
+      env_file:
+        - ./.env
       command: "go run main.go"
       depends_on:
         - db
+      volumes:
+        - .:/go/src/API

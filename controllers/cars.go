@@ -29,7 +29,6 @@ func CarsCreate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var car models.Car
-
 	err = json.Unmarshal(body, &car)
 
 	if err != nil {

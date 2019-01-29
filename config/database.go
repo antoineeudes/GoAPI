@@ -4,24 +4,19 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
+	// github.com/lib/pq allows the connection with postgresql server
 	_ "github.com/lib/pq"
 )
 
 var db *sql.DB
 
-const (
-	host     = "db"
-	port     = 5432
-	user     = "username"
-	password = "secret"
-	dbname   = "dev"
-)
-
+// DatabaseInit realizes connection with database and create tables if they don't exist
 func DatabaseInit() {
 	var err error
-	dbinfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+	dbinfo := fmt.Sprintf("host=db port=%s user=%s password=%s dbname=%s sslmode=disable",
+		os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
 	db, err = sql.Open("postgres", dbinfo)
 
 	if err != nil {
@@ -30,10 +25,10 @@ func DatabaseInit() {
 
 	err = db.Ping()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	fmt.Println("Successfully connected to database!")
 
+	fmt.Println("Successfully connected to database!")
 	createCarsTable()
 }
 
@@ -45,6 +40,7 @@ func createCarsTable() {
 	}
 }
 
+// Db returns the database used
 func Db() *sql.DB {
 	return db
 }

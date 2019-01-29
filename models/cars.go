@@ -49,12 +49,11 @@ func AllCars() *Cars {
 	var cars Cars
 
 	rows, err := config.Db().Query("SELECT * FROM cars")
+	defer rows.Close()
 
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	defer rows.Close()
 
 	for rows.Next() {
 		var c Car
