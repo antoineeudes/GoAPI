@@ -53,7 +53,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		tk := &models.Token{}
 
 		token, err := jwt.ParseWithClaims(tokenPart, tk, func(token *jwt.Token) (interface{}, error) {
-			return []byte(os.Getenv("token_password")), nil
+			return []byte(os.Getenv("TOKEN_PASSWORD")), nil
 		})
 
 		if err != nil { //Malformed token, returns with http code 403 as usual
