@@ -25,7 +25,7 @@ func init() {
 	}
 
 	db = conn
-	db.Debug().AutoMigrate(&Account{}, Gallery{}) //Database migration
+	db.Debug().AutoMigrate(&Account{}, Gallery{}, File{}) //Database migration
 }
 
 //returns a handle to the DB object

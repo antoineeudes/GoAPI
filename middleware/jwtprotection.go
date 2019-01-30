@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -16,13 +17,13 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		notAuth := []string{"/api/user/new", "/api/user/login"} //List of endpoints that doesn't require auth
-		requestPath := r.URL.Path                               //current request path
+		notAuth := []string{"/api/user/new", "/api/user/login", "^(/files/)(.)+"} //List of endpoints that doesn't require auth
+		requestPath := r.URL.Path                                                 //current request path
 
 		//check if request does not need authentication, serve the request if it doesn't need it
 		for _, value := range notAuth {
-
-			if value == requestPath {
+			matched, _ := regexp.MatchString(value, requestPath)
+			if matched {
 				next.ServeHTTP(w, r)
 				return
 			}

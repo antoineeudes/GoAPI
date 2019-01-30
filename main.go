@@ -12,7 +12,6 @@ import (
 )
 
 func main() {
-
 	router := router.InitializeRouter()
 	defer models.GetDB().Close()
 	router.Use(middleware.JwtAuthentication)
