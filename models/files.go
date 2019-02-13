@@ -11,6 +11,7 @@ type File struct {
 	Url       string `json:"url"`
 	Type      string `json:"type"`
 	GalleryID uint
+	Pending   bool
 }
 
 func (file *File) Create() map[string]interface{} {

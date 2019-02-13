@@ -25,6 +25,7 @@ type Account struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Token    string `json:"token";sql:"-"`
+	Admin    bool
 }
 
 //Validate incoming user details...
@@ -42,6 +43,7 @@ func (account *Account) Validate() (map[string]interface{}, bool) {
 	temp := &Account{}
 
 	//check for errors and duplicate emails
+	temp.Admin = false
 	err := GetDB().Table("accounts").Where("email = ?", account.Email).First(temp).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return u.Message(false, "Connection error. Please retry"), false
