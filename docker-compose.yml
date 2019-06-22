@@ -7,19 +7,19 @@ services:
     ports:
       - 8080:8080
   db:
-    build: ./init_db/
+    image: postgres:latest
     ports:
       - ${DB_PORT}:5432
     env_file:
       - ./.env
   api:
-      build: .
-      ports:
-        - ${API_PORT}:5000
-      env_file:
-        - ./.env
-      command: "go run main.go"
-      depends_on:
-        - db
-      volumes:
-        - .:/go/src/API
+    build: .
+    ports:
+      - ${API_PORT}:5000
+    env_file:
+      - ./.env
+    command: "go run main.go"
+    depends_on:
+      - db
+    volumes:
+      - .:/go/src/API
